@@ -5,29 +5,29 @@ module.exports = {
     app: {
         name: 'MEAN - FullStack JS - Development'
     },
-//    facebook: {
-//        clientID: 'APP_ID',
-//        clientSecret: 'APP_SECRET',
-//        callbackURL: 'http://localhost:3000/auth/facebook/callback'
-//    },
+    facebook: {
+        clientID: 'APP_ID',
+        clientSecret: 'APP_SECRET',
+        callbackURL: 'http://localhost:3000/auth/facebook/callback'
+    },
     twitter: {
         clientID: 'g6bDthYtzCVy2GpAUn6GYcuPV',
         clientSecret: '4e7hDTAaXT4gTTMvBEiryOsEYltt78YHznWPTw22ERuThiuFkn',
         callbackURL: 'http://localhost:3000/auth/twitter/callback'
+    },
+    github: {
+        clientID: 'APP_ID',
+        clientSecret: 'APP_SECRET',
+        callbackURL: 'http://localhost:3000/auth/github/callback'
+    },
+    google: {
+        clientID: 'APP_ID',
+        clientSecret: 'APP_SECRET',
+        callbackURL: 'http://localhost:3000/auth/google/callback'
+    },
+    linkedin: {
+        clientID: 'API_KEY',
+        clientSecret: 'SECRET_KEY',
+        callbackURL: 'http://localhost:3000/auth/linkedin/callback'
     }
-//    github: {
-//        clientID: 'APP_ID',
-//        clientSecret: 'APP_SECRET',
-//        callbackURL: 'http://localhost:3000/auth/github/callback'
-//    },
-//    google: {
-//        clientID: 'APP_ID',
-//        clientSecret: 'APP_SECRET',
-//        callbackURL: 'http://localhost:3000/auth/google/callback'
-//    },
-//    linkedin: {
-//        clientID: 'API_KEY',
-//        clientSecret: 'SECRET_KEY',
-//        callbackURL: 'http://localhost:3000/auth/linkedin/callback'
-//    }
 };

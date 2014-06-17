@@ -1,14 +1,13 @@
-<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-    <span>{{article.created | date:'medium'}}</span> /
-    <span>{{article.user.name}}</span>
-    <h2>{{article.title}}</h2>
-    <div data-ng-if="hasAuthorization(article)">
-        <a class="btn" href="/#!/articles/{{article._id}}/edit">
+<section data-ng-controller="MatchesController" data-ng-init="findOne()">
+    <span>{{match.created | date:'medium'}}</span> /
+    <h2>{{match.team1.title}} VS {{match.team2.title}}</h2>
+    <div data-ng-if="hasAuthorization(match)">
+        <a class="btn" href="/#!/match/{{match._id}}/edit">
             <i class="glyphicon glyphicon-edit"></i>
         </a>
-        <a class="btn" data-ng-click="remove(article);">
+        <a class="btn" data-ng-click="remove(match);">
             <i class="glyphicon glyphicon-trash"></i>
         </a>
     </div>
-    <div>{{article.content}}</div>
+    <div>{{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}}</div>
 </section>

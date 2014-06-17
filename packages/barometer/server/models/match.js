@@ -24,12 +24,12 @@ var MatchSchema = new Schema({
     },
     team1: {
         type: Schema.ObjectId,
-        ref: 'TeamInCup',
+        ref: 'Team',
         required: true
     },
     team2: {
         type: Schema.ObjectId,
-        ref: 'TeamInCup',
+        ref: 'Team',
         required: true
     },
     team1_support: {

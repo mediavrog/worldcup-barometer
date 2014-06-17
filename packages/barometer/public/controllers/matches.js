@@ -1,21 +1,24 @@
 'use strict';
 
-angular.module('mean').controller('MatchesController', ['$scope', '$stateParams', '$location', 'Global', 'Matches',
-    function($scope, $stateParams, $location, Global, Matches) {
+angular.module('mean').controller('MatchesController', ['$scope', '$stateParams', '$location', 'Global', 'Matches', 'Teams',
+    function ($scope, $stateParams, $location, Global, Matches, Teams) {
         $scope.global = Global;
 
-        $scope.hasAuthorization = function(match) {
+        $scope.hasAuthorization = function (match) {
             if (!match || !match.user) return false;
             return $scope.global.isAdmin;
         };
 
-        $scope.create = function(isValid) {
+        $scope.create = function (isValid) {
             if (isValid) {
                 var match = new Matches({
                     started_at: this.started_at,
-                    ended_at: this.ended_at
+                    ended_at: this.ended_at,
+                    team1: this.team1,
+                    team2: this.team2
                 });
-                match.$save(function(response) {
+
+                match.$save(function (response) {
                     $location.path('matches/' + response._id);
                 });
 
@@ -24,9 +27,14 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
             } else {
                 $scope.submitted = true;
             }
+
+            Teams.query(function (teams) {
+                $scope.teams = teams;
+                console.log($scope.teams);
+            });
         };
 
-        $scope.remove = function(article) {
+        $scope.remove = function (article) {
             if (article) {
                 article.$remove();
 
@@ -36,13 +44,13 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
                     }
                 }
             } else {
-                $scope.article.$remove(function(response) {
+                $scope.article.$remove(function (response) {
                     $location.path('matches');
                 });
             }
         };
 
-        $scope.update = function(isValid) {
+        $scope.update = function (isValid) {
             if (isValid) {
                 var article = $scope.article;
                 if (!article.updated) {
@@ -50,7 +58,7 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
                 }
                 article.updated.push(new Date().getTime());
 
-                article.$update(function() {
+                article.$update(function () {
                     $location.path('matches/' + article._id);
                 });
             } else {
@@ -58,16 +66,16 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
             }
         };
 
-        $scope.find = function() {
-            Matches.query(function(matches) {
+        $scope.find = function () {
+            Matches.query(function (matches) {
                 $scope.matches = matches;
             });
         };
 
-        $scope.findOne = function() {
+        $scope.findOne = function () {
             Matches.get({
                 matchId: $stateParams.matchId
-            }, function(match) {
+            }, function (match) {
                 $scope.match = match;
             });
         };

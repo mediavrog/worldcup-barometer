@@ -25,8 +25,6 @@ exports.match = function (req, res, next, id) {
  */
 exports.create = function (req, res) {
     var match = new Match(req.body);
-    match.team1 = req.team1;
-    match.team2 = req.team2;
 
     match.save(function (err) {
         if (err) {

@@ -57,7 +57,6 @@ TeamInCupSchema.path('cup_slug').validate(function (cup_slug) {
  * Statics
  */
 TeamInCupSchema.statics.load = function (id, cb) {
-    console.log('TeamInCupSchema#load: ' + id);
     this.findOne({
         slug: id
     }).exec(cb);

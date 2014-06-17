@@ -16,6 +16,8 @@ Barometer.register(function(app, auth, database) {
     //We enable routing. By default the Package Object is passed to the routes
     Barometer.routes(app, auth, database);
 
+    //Barometer.angularDependencies(['moment', 'ui.bootstrap.datetimepicker']);
+
     //We are adding a link to the main menu for all authenticated users
     Barometer.menus.add({
         roles: ['authenticated'],

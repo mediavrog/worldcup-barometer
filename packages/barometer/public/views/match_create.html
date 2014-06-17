@@ -4,7 +4,17 @@
         <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.started_at.$invalid }">
             <label mean-token="'create-started-at'" class="col-md-3 control-label">Start at</label>
             <div class="col-md-9">
-                <input name="started_at" type="text" class="form-control" data-ng-model="started_at" id="started_at" placeholder="Starts at" required>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="started_at" data-ng-model="started_at">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="started_at" data-datetimepicker-config="{ dropdownSelector: '#dropdown' }"></datetimepicker>
+                    </ul>
+                </div>
                 <div ng-show="submitted && matchForm.started_at.$invalid" class="help-block">
                     <p ng-show="matchForm.started_at.$error.required">Starts at date is required</p>
                 </div>
@@ -14,7 +24,17 @@
         <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.ended_at.$invalid }">
             <label mean-token="'create-ended-at'" class="col-md-3 control-label">Ends at</label>
             <div class="col-md-9">
-                <input name="ended_at" type="text" class="form-control" data-ng-model="ended_at" id="ended_at" placeholder="Ends at" required>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="ended_at" data-ng-model="ended_at">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="ended_at" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"></datetimepicker>
+                    </ul>
+                </div>
                 <div ng-show="submitted && matchForm.ended_at.$invalid" class="help-block">
                     <p ng-show="matchForm.ended_at.$error.required">Ends at date is required</p>
                 </div>

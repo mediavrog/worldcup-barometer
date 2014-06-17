@@ -1,9 +1,9 @@
 {
     "name": "barometer",
     "version": "0.0.1",
-    "description": "Some description of barometer",
+    "description": "Worldcup Barometer",
     "author": {
-        "name": "mean scaffold"
+        "name": "Maik Vlcek"
     },
     "mean": "0.3.3",
     "engines": {

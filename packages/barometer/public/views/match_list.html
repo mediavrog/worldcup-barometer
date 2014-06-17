@@ -1,0 +1,22 @@
+<section data-ng-controller="MatchesController" data-ng-init="find()">
+    <ul class="matches unstyled">
+        <li data-ng-repeat="match in matches">
+            <span>{{match.created | date:'medium'}}</span> /
+            <h2>
+                <a data-ng-href="#!/matches/{{match._id}}">{{match.team1.title}} VS {{match.team2.title}}</a>
+                <span data-ng-if="hasAuthorization(match)">
+                    <a class="btn" href="/#!/matches/{{match._id}}/edit">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <a class="btn" data-ng-click="remove(match);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </span>
+            </h2>
+            <div>
+                <p>{{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}}</p>
+            </div>
+        </li>
+    </ul>
+    <h1 data-ng-hide="!matches || matches.length">No matches configured. <br> Why don't you <a href="/#!/matches/create">create One</a>?</h1>
+</section>

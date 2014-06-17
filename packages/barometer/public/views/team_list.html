@@ -1,0 +1,22 @@
+<section data-ng-controller="TeamsController" data-ng-init="find()">
+    <ul class="matches unstyled">
+        <li data-ng-repeat="team in teams">
+            <span>{{team.created | date:'medium'}}</span> /
+            <a data-ng-href="#!/teams/{{team.slug}}">{{team.title}}</a>
+                <span data-ng-if="hasAuthorization(team)">
+                    <a class="btn" href="/#!/teams/{{team.slug}}/edit">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <a class="btn" data-ng-click="remove(team);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </span>
+
+            <div><p><img src="/barometer/assets/img/flags/{{team.slug | uppercase}}.png"/>
+                #{{team.slug | uppercase}} #{{team.cup_slug}}  pts: {{team.points}} support: {{team.support}}</p>
+            </div>
+        </li>
+    </ul>
+    <h1 data-ng-hide="!teams || teams.length">No teams configured. <br> Why don't you <a href="/#!/teams/create">create
+        One</a>?</h1>
+</section>

@@ -1,0 +1,16 @@
+<section data-ng-controller="TeamsController" data-ng-init="findOne()">
+    <span>{{team.created | date:'medium'}}</span> /
+    <span>{{team.slug}}</span>
+    <h2>{{article.title}}</h2>
+    <div data-ng-if="hasAuthorization(team)">
+        <a class="btn" href="/#!/teams/{{team.slug}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove(team);">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div><p><img src="/barometer/assets/img/flags/{{team.slug | uppercase}}.png"/>
+        #{{team.slug | uppercase}} #{{team.cup_slug}}  pts: {{team.points}} support: {{team.support}}</p>
+    </div>
+</section>

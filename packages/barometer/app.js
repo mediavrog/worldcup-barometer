@@ -5,7 +5,7 @@
  */
 var Module = require('meanio').Module;
 
-var Barometer = new Module('barometer');
+var Barometer = new Module('Barometer');
 
 /*
  * All MEAN packages require registration
@@ -18,9 +18,37 @@ Barometer.register(function(app, auth, database) {
 
     //We are adding a link to the main menu for all authenticated users
     Barometer.menus.add({
-        title: 'barometer example page',
-        link: 'barometer example page',
         roles: ['authenticated'],
+        title: 'Worldcup Barometer',
+        link: 'barometer',
+        menu: 'main'
+    });
+
+    Barometer.menus.add({
+        roles: ['authenticated'],
+        title: 'All matches',
+        link: 'all matches',
+        menu: 'main'
+    });
+
+    Barometer.menus.add({
+        roles: ['authenticated'],
+        title: 'Create match',
+        link: 'create match',
+        menu: 'main'
+    });
+
+    Barometer.menus.add({
+        roles: ['authenticated'],
+        title: 'All teams',
+        link: 'all teams',
+        menu: 'main'
+    });
+
+    Barometer.menus.add({
+        roles: ['authenticated'],
+        title: 'Create team',
+        link: 'create team',
         menu: 'main'
     });
 

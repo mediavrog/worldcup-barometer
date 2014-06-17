@@ -1,26 +1,34 @@
 'use strict';
 
+var matches = require('../controllers/matches');
+var teams = require('../controllers/teams');
+
+// authorization helpers
+var hasAuthorization = function (req, res, next) {
+    if (!req.user.isAdmin) {
+        return res.send(401, 'User is not authorized');
+    }
+    next();
+};
+
 // The Package is past automatically as first parameter
-module.exports = function(Barometer, app, auth, database) {
+module.exports = function (Barometer, app, auth, database) {
 
-    app.get('/barometer/example/anyone', function(req, res, next) {
-        res.send('Anyone can access this');
-    });
+    app.route('/matches')
+        .get(matches.all)
+        .post(auth.requiresLogin, matches.create);
+    app.route('/matches/:matchId')
+        .get(matches.show)
+        .put(auth.requiresLogin, hasAuthorization, matches.update)
+        .delete(auth.requiresLogin, hasAuthorization, matches.destroy);
+    app.param('matchId', matches.match);
 
-    app.get('/barometer/example/auth', auth.requiresLogin, function(req, res, next) {
-        res.send('Only authenticated users can access this');
-    });
-
-    app.get('/barometer/example/admin', auth.requiresAdmin, function(req, res, next) {
-        res.send('Only users with Admin role can access this');
-    });
-
-    app.get('/barometer/example/render', function(req, res, next) {
-        Barometer.render('index', {
-            package: 'barometer'
-        }, function(err, html) {
-            //Rendering a view from the Package server/views
-            res.send(html);
-        });
-    });
+    app.route('/teams')
+        .get(teams.all)
+        .post(auth.requiresLogin, teams.create);
+    app.route('/teams/:teamSlug')
+        .get(teams.show)
+        .put(auth.requiresLogin, hasAuthorization, teams.update)
+        .delete(auth.requiresLogin, hasAuthorization, teams.destroy);
+    app.param('teamSlug', teams.team);
 };

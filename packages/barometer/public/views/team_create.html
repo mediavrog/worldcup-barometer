@@ -1,0 +1,41 @@
+<section data-ng-controller="TeamsController">
+    <form name="teamForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(teamForm.$valid)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && teamForm.title.$invalid }">
+            <label mean-token="'create-title'" class="col-md-3 control-label">Title</label>
+            <div class="col-md-9">
+                <input name="title" type="text" class="form-control" data-ng-model="title" id="title" placeholder="Title" required>
+                <div ng-show="submitted && teamForm.title.$invalid" class="help-block">
+                    <p ng-show="teamForm.title.$error.required">Title is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && teamForm.slug.$invalid }">
+            <label mean-token="'create-slug'" class="col-md-3 control-label">Slug</label>
+            <div class="col-md-9">
+                <input name="slug" type="text" class="form-control" data-ng-model="slug" id="slug" placeholder="Slug (ENG)" required>
+                <div ng-show="submitted && teamForm.slug.$invalid" class="help-block">
+                    <p ng-show="teamForm.slug.$error.required">Slug is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && teamForm.cup_slug.$invalid }">
+            <label mean-token="'create-cup-slug'" class="col-md-3 control-label">Cup Slug</label>
+            <div class="col-md-9">
+                <input name="cup_slug" type="text" class="form-control" data-ng-model="cup_slug" id="cup_slug" placeholder="Cup Slug" required>
+                <div ng-show="submitted && teamForm.cup_slug.$invalid" class="help-block">
+                    <p ng-show="teamForm.cup_slug.$error.required">Slug for cup is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </div>
+        
+    </form>
+</section>

@@ -1,0 +1,31 @@
+<section data-ng-controller="MatchesController">
+    <form name="matchForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(matchForm.$valid)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.started_at.$invalid }">
+            <label mean-token="'create-started-at'" class="col-md-3 control-label">Start at</label>
+            <div class="col-md-9">
+                <input name="started_at" type="text" class="form-control" data-ng-model="started_at" id="started_at" placeholder="Starts at" required>
+                <div ng-show="submitted && matchForm.started_at.$invalid" class="help-block">
+                    <p ng-show="matchForm.started_at.$error.required">Starts at date is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.ended_at.$invalid }">
+            <label mean-token="'create-ended-at'" class="col-md-3 control-label">Ends at</label>
+            <div class="col-md-9">
+                <input name="ends_at" type="text" class="form-control" data-ng-model="ends_at" id="ends_at" placeholder="Ends at" required>
+                <div ng-show="submitted && matchForm.ends_at.$invalid" class="help-block">
+                    <p ng-show="matchForm.ends_at.$error.required">Ends at date is required</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </div>
+    </form>
+</section>

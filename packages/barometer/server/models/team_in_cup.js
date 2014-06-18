@@ -35,6 +35,10 @@ var TeamInCupSchema = new Schema({
     support: {
         type: Number,
         default: 0
+    },
+    boo: {
+        type: Number,
+        default: 0
     }
 });
 

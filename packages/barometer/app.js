@@ -6,7 +6,6 @@
 var Module = require('meanio').Module;
 
 var Barometer = new Module('Barometer');
-
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
@@ -16,7 +15,7 @@ Barometer.register(function(app, auth, database) {
     //We enable routing. By default the Package Object is passed to the routes
     Barometer.routes(app, auth, database);
 
-    //Barometer.angularDependencies(['moment', 'ui.bootstrap.datetimepicker']);
+    //Barometer.angularDependencies(['ui.bootstrap.datetimepicker']);
 
     //We are adding a link to the main menu for all authenticated users
     Barometer.menus.add({
@@ -75,6 +74,8 @@ Barometer.register(function(app, auth, database) {
         //you now have the settings object
     });
     */
+
+    Barometer.aggregateAsset('css', 'styles.css');
 
     return Barometer;
 });

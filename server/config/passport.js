@@ -73,6 +73,7 @@ module.exports = function(passport) {
                         username: profile.username,
                         provider: 'twitter',
                         twitter: profile._json,
+                        twitter_token: {'token' : token, 'secret': tokenSecret},
                         roles: ['authenticated']
                     });
                     user.save(function(err) {
@@ -80,7 +81,12 @@ module.exports = function(passport) {
                         return done(err, user);
                     });
                 } else {
-                    return done(err, user);
+                    // refresh token
+                    user.twitter_token = {'token' : token, 'secret': tokenSecret};
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
                 }
             });
         }

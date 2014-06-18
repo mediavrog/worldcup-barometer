@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean').controller('MatchesController', ['$scope', '$stateParams', '$location', 'Global', 'Matches', 'Teams',
-    function ($scope, $stateParams, $location, Global, Matches, Teams) {
+angular.module('mean').controller('MatchesController', ['$scope', '$stateParams', '$location', 'Global', 'Matches', 'Me',
+    function ($scope, $stateParams, $location, Global, Matches, Me) {
         $scope.global = Global;
 
         $scope.hasAuthorization = function (match) {
@@ -28,9 +28,11 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
                 $scope.submitted = true;
             }
 
-            Teams.query(function (teams) {
-                $scope.teams = teams;
-                console.log($scope.teams);
+            console.log('Has user object?');
+            console.log(Global.user);
+            console.log(Global.user.twitter);
+            Me.query(function(user) {
+                console.log(user);
             });
         };
 

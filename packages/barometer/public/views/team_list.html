@@ -13,7 +13,7 @@
                 </span>
 
             <img height="20" width="20" src="/barometer/assets/img/flags/{{team.slug | uppercase}}.png"/>
-                #{{team.slug | uppercase}} #{{team.cup_slug}}  pts: {{team.points}} support: {{team.support}}
+                #{{team.slug | uppercase}} #{{team.cup_slug}}  pts: {{team.points}} support: {{team.support}} boo: {{team.boo}}
         </li>
     </ul>
     <h1 data-ng-hide="!teams || teams.length">No teams configured. <br> Why don't you <a href="/#!/teams/create">create

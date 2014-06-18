@@ -40,6 +40,14 @@ var MatchSchema = new Schema({
         type: Number,
         default: 0
     },
+    team1_boo: {
+        type: Number,
+        default: 0
+    },
+    team2_boo: {
+        type: Number,
+        default: 0
+    },
     team1_points: {
         type: Number,
         default: 0

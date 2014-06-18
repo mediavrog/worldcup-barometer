@@ -1,26 +1,37 @@
-<div class="" data-ng-controller="BarometerController">
-	<h1>Example view from your new awesome package</h1>
-	<h2>Package: {{package.name}}</h2>
-	<ol>
-		<li>
-			<a href="barometer/example/anyone">Server route that anyone can access</a>
-		</li>
-		<li>
-			<a href="barometer/example/auth">Server route that requires authentication</a>
-		</li>
-		<li>
-			<a href="barometer/example/admin">Server route that requires admin user</a>
-		</li>
-		<li>
-			<a href="barometer/example/render">Raw Html rendering example from using swig</a>
-		</li>
-	</ol>
-	<h3><img src="/barometer/assets/img/logo.png" /></h3>
-	</br>
-	<p class="alert alert-info">You can fwqeqweqweqweqweqweind your package in /packages/barometer</p>
-	</br>
-	<p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/barometer</p>
-	</br>
-	<h3><a href="http://www.mean.io/#!/docs">Documentation</a></h3>
-	</br>
+<div data-ng-controller="BarometerController" data-ng-init="loadRelevantMatch()">
+
+    <!-- Selector for matches -->
+    <select name="match" class="match_dropdown btn btn-default btn-block center-block">
+        <option ng-repeat="match in matches" value="{{match._id}}">
+            {{match | relativeMatchTime}} {{match.team1.slug}} vs {{match.team2.slug}}
+        </option>
+    </select>
+
+    <!-- selected match info -->
+    <div class="row">
+        <div class="col-lg-2 col-md-offset-3">
+            <team-info ng-model="match.team1"></team-info>
+        </div>
+        <div class="col-lg-2 text-center"><strong>vs</strong></div>
+        <div class="col-lg-2">
+            <team-info ng-model="match.team2"></team-info>
+        </div>
+    </div>
+
+    <div class="text-center">{{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}}</div>
+
+    <progress>
+        <bar ng-repeat="bar in team_support track by $index" value="bar.percentage" type="{{bar.type}}">
+            <span>{{bar.value}}</span>
+        </bar>
+    </progress>
+
+    Cheer button t1
+    Boo button t1
+
+    twitter live feed
+
+    cheer button t2
+    boo button t2
+
 </div>

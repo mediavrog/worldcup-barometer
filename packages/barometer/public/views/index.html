@@ -1,4 +1,4 @@
-<div data-ng-controller="BarometerController" data-ng-init="loadRelevantMatch()">
+<div data-ng-controller="BarometerController" data-ng-init="initialize()">
 
     <!-- Selector for matches -->
     <select name="match" class="match_dropdown btn btn-default btn-block center-block">
@@ -26,12 +26,32 @@
         </bar>
     </progress>
 
-    Cheer button t1
-    Boo button t1
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-3">
+            <action-button-cheer ng-team="match.team1" ng-match="match"></action-button-cheer>
+        </div>
 
-    twitter live feed
+        <div class="col-lg-6">
+            <twitter-stream keyword=":) (#{{match.team1.slug}} OR #{{match.team2.slug}})"></twitter-stream>
+        </div>
 
-    cheer button t2
-    boo button t2
+        <div class="col-lg-3">
+            <action-button-cheer ng-team="match.team2" ng-match="match"></action-button-cheer>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-3">
+            <action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>
+        </div>
+
+        <div class="col-lg-6">
+            <twitter-stream keyword=":( (#{{match.team1.slug}} OR #{{match.team2.slug}})"></twitter-stream>
+        </div>
+
+        <div class="col-lg-3">
+            <action-button-boo ng-team="match.team2" ng-match="match"></action-button-boo>
+        </div>
+    </div>
 
 </div>

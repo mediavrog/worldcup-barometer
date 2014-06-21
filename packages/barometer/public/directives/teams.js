@@ -13,7 +13,7 @@ angular.module('mean.barometer')
                 '<a href="https://twitter.com/search?src=typd&q=%23{{ngModel.slug}}">#{{ngModel.slug}}</a></div>'
         };
     })
-    .directive('actionButtonCheer', ['$http', function ($http) { //http://stackoverflow.com/a/22142363/472262
+    .directive('actionButtonCheer', ['Teams', function (Teams) {
         return {
             scope: {
                 ngTeam: '=',
@@ -29,6 +29,23 @@ angular.module('mean.barometer')
                 elem.bind('click', function () {
                     console.log('Cheer for team ' + scope.ngTeam.slug);
 
+                    // always update team support
+                    scope.ngTeam.support++;
+
+                    // since the teams model might just be a plain old javascript object
+                    // when referenced by match, we use the service update method in that case
+                    // otherwise, we use the standard $update method on the resource
+                    // TODO: find out if there a better way
+                    if (angular.isDefined(scope.ngTeam.$update)) {
+                        scope.ngTeam.$update(function () {
+                            //console.log('Team updated (using self aware resource)');
+                        });
+                    } else {
+                        Teams.update(scope.ngTeam, function(){
+                            //console.log('Team updated (using service)');
+                        });
+                    }
+
                     // match handling
                     if (angular.isDefined(scope.ngMatch)) {
                         console.log('... in match ' + scope.ngMatch._id);
@@ -37,10 +54,13 @@ angular.module('mean.barometer')
                         } else {
                             scope.ngMatch.team2_support++;
                         }
+
+                        //console.log('Update match ', scope.ngMatch, scope.ngMatch.$update);
+                        scope.ngMatch.$update(function () {
+                            //console.log('Match updated');
+                        });
                     }
 
-                    // always update team support
-                    scope.ngTeam.support++;
                     scope.$apply();
                 });
             }

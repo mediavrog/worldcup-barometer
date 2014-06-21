@@ -1,27 +1,65 @@
-<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-    <form name="articleForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(articleForm.$valid)" novalidate>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid }">
-            <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">Title</label>
-            <div class="col-md-10">
-                <input name="title" type="text" class="form-control" data-ng-model="article.title" id="title" placeholder="Title" required>
-                <div ng-show="submitted && articleForm.title.$invalid" class="help-block">
-                    <p ng-show="articleForm.title.$error.required">Title is required</p>
-                </div>
-            </div>
+<section data-ng-controller="MatchesController" data-ng-init="findOne()">
+    <form name="matchForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(matchForm.$valid)"
+          novalidate>
 
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.content.$invalid }">
-            <label mean-token="'edit-content'" for="content" class="col-md-2 control-label">Content</label>
-            <div class="col-md-10">
-                <textarea name="content" data-ng-model="article.content" id="content" cols="30" rows="10" placeholder="Content" class="form-control" required></textarea>
-                <div ng-show="submitted && articleForm.content.$invalid" class="help-block">
-                    <p ng-show="articleForm.content.$error.required">Content is required</p>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.started_at.$invalid }">
+            <label mean-token="'create-started-at'" class="col-md-3 control-label">Start at</label>
+
+            <div class="col-md-9">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target="#"
+                       href="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="started_at" data-ng-model="match.started_at">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="started_at"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdown' }"></datetimepicker>
+                    </ul>
+                </div>
+                <div ng-show="submitted && matchForm.started_at.$invalid" class="help-block">
+                    <p ng-show="matchForm.started_at.$error.required">Starts at date is required</p>
                 </div>
             </div>
         </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && matchForm.ended_at.$invalid }">
+            <label mean-token="'create-ended-at'" class="col-md-3 control-label">Ends at</label>
+
+            <div class="col-md-9">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                       href="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="ended_at" data-ng-model="match.ended_at">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="ended_at"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"></datetimepicker>
+                    </ul>
+                </div>
+                <div ng-show="submitted && matchForm.ended_at.$invalid" class="help-block">
+                    <p ng-show="matchForm.ended_at.$error.required">Ends at date is required</p>
+                </div>
+            </div>
+        </div>
+
+        <div ng-controller="TeamsController" ng-init="find()">
+            <select name="team1"
+                    data-ng-model="match.team1" id="team1"
+                    ng-options="team as team.slug for team in teams"></select>
+
+            <select name="team2" data-ng-model="match.team2" id="team2"
+                    ng-options="team as team.slug for team in teams"></select>
+        </div>
+
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button mean-token="'edit-submit'" type="submit" class="btn btn-default">Submit</button>
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">Submit</button>
             </div>
         </div>
     </form>

@@ -47,11 +47,6 @@ angular.module('mean').controller('TeamsController', ['$scope', '$stateParams', 
         $scope.update = function(isValid) {
             if (isValid) {
                 var team = $scope.team;
-                if (!team.updated) {
-                    team.updated = [];
-                }
-                team.updated.push(new Date().getTime());
-
                 team.$update(function() {
                     $location.path('teams/' + team.slug);
                 });

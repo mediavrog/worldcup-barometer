@@ -12,8 +12,12 @@ angular.module('mean.barometer').factory('Barometer', [
 angular.module('mean').factory('Teams', ['$resource',
     function ($resource) {
         return $resource('teams/:teamSlug', {
-            slug: '@slug'
+            teamSlug: '@slug'
         }, {
+            save:   {
+                method:'POST',
+                params: {teamSlug: '@_id'}
+            },
             update: {
                 method: 'PUT'
             }

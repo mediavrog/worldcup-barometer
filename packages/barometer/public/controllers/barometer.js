@@ -43,7 +43,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
             Matches.get({
                 matchId: matchId
             }, function (match) {
-                console.log('Loaded match..', match);
+                //console.log('Loaded match..', match);
                 $scope.match = match;
             });
         };
@@ -70,7 +70,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 var team2Support = $scope.match.team2_support;
                 var team1SupportPercentage = 50, team2SupportPercentage = 50;
                 if (team1Support > 0 && team2Support > 0) {
-                    team1SupportPercentage = team1Support * 100 / (team1Support + team2Support);
+                    team1SupportPercentage = Math.round(team1Support * 100 / (team1Support + team2Support));
                     team2SupportPercentage = 100 - team1SupportPercentage;
                 }
                 $scope.team_support[0].value = team1Support;

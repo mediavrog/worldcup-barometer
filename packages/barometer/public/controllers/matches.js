@@ -36,17 +36,17 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
 //            });
         };
 
-        $scope.remove = function (article) {
-            if (article) {
-                article.$remove();
+        $scope.remove = function (match) {
+            if (match) {
+                match.$remove();
 
-                for (var i in $scope.articles) {
-                    if ($scope.articles[i] === article) {
-                        $scope.articles.splice(i, 1);
+                for (var i in $scope.matches) {
+                    if ($scope.matches[i] === match) {
+                        $scope.matches.splice(i, 1);
                     }
                 }
             } else {
-                $scope.article.$remove(function (response) {
+                $scope.match.$remove(function (response) {
                     $location.path('matches');
                 });
             }
@@ -54,14 +54,9 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
 
         $scope.update = function (isValid) {
             if (isValid) {
-                var article = $scope.article;
-                if (!article.updated) {
-                    article.updated = [];
-                }
-                article.updated.push(new Date().getTime());
-
-                article.$update(function () {
-                    $location.path('matches/' + article._id);
+                var match = $scope.match;
+                match.$update(function () {
+                    $location.path('matches/' + match._id);
                 });
             } else {
                 $scope.submitted = true;

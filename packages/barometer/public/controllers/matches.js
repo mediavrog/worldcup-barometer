@@ -28,12 +28,12 @@ angular.module('mean').controller('MatchesController', ['$scope', '$stateParams'
                 $scope.submitted = true;
             }
 
-            console.log('Has user object?');
-            console.log(Global.user);
-            console.log(Global.user.twitter);
-            Me.query(function(user) {
-                console.log(user);
-            });
+//            console.log('Has user object?');
+//            console.log(Global.user);
+//            console.log(Global.user.twitter);
+//            Me.query(function(user) {
+//                console.log(user);
+//            });
         };
 
         $scope.remove = function (article) {

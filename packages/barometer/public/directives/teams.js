@@ -54,7 +54,7 @@ angular.module('mean.barometer')
             },
             restrict: 'E',
             replace: true,
-            template: '<div class="btn btn-warning center-block">Boo</div>{{matchId}}'
+            template: '<div class="btn btn-danger center-block">Boo</div>{{matchId}}'
         };
     }])
     .directive('twitterStream', ['$http', function ($http) {

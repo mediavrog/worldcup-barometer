@@ -1,7 +1,6 @@
 <div data-ng-controller="BarometerController" data-ng-init="initialize()">
 
-    <!-- Selector for matches -->
-    <select name="match" class="match_dropdown btn btn-default btn-block center-block">
+    <select name="match" ng-model="selectedMatchId" ng-change="loadMatch(selectedMatchId)" class="match_dropdown btn btn-default btn-block center-block">
         <option ng-repeat="match in matches" value="{{match._id}}">
             {{match | relativeMatchTime}} {{match.team1.slug}} vs {{match.team2.slug}}
         </option>

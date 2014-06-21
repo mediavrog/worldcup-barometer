@@ -27,7 +27,6 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
             Matches.most_relevant(function (matches) {
                 $scope.matches = matches;
                 $scope.match = matches[0];
-
                 // checks for updates match support values
                 // TODO: use server push (e. g. socket.io for braodcasting on model updates)
                 poller = $interval(function () {
@@ -40,6 +39,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
          * Reloads the currently selected match
          */
         $scope.loadMatch = function (matchId) {
+            console.log('Load match with id ' + matchId);
             Matches.get({
                 matchId: matchId
             }, function (match) {

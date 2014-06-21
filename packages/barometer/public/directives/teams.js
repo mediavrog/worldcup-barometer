@@ -77,14 +77,4 @@ angular.module('mean.barometer')
             template: '<div class="btn btn-danger center-block">Boo</div>{{matchId}}'
         };
     }])
-    .directive('twitterStream', ['$http', function ($http) {
-        return {
-            scope: {
-                keyword: '@'
-            },
-            restrict: 'E',
-            replace: true,
-            template: '<div class="teamInfo">{{keyword}}</div>'
-        };
-    }])
 ;

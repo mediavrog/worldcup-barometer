@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.barometer').controller('BarometerController', ['$scope', '$interval', 'Global', 'Barometer', 'Matches',
-    function ($scope, $interval, Global, Barometer, Matches) {
+angular.module('mean.barometer').controller('BarometerController', ['$scope', '$interval', 'Global', 'Matches',
+    function ($scope, $interval, Global, Matches) {
         $scope.global = Global;
         $scope.match = null;
         $scope.matches = [];
@@ -39,7 +39,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
          * Reloads the currently selected match
          */
         $scope.loadMatch = function (matchId) {
-            console.log('Load match with id ' + matchId);
+            // console.log('Load match with id ' + matchId);
             Matches.get({
                 matchId: matchId
             }, function (match) {
@@ -64,7 +64,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
         });
 
         $scope.$watch('match', function (newMatch, oldMatch) {
-            console.log('Match  was updated ', newMatch);
+            // console.log('Match  was updated ', newMatch);
             if (newMatch !== null) {
                 var team1Support = $scope.match.team1_support;
                 var team2Support = $scope.match.team2_support;

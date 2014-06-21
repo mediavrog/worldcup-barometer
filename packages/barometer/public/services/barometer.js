@@ -1,13 +1,5 @@
 'use strict';
 
-angular.module('mean.barometer').factory('Barometer', [
-    function () {
-        return {
-            name: 'barometer'
-        };
-    }
-]);
-
 //Teams service used for articles REST endpoint
 angular.module('mean').factory('Teams', ['$resource',
     function ($resource) {
@@ -16,7 +8,7 @@ angular.module('mean').factory('Teams', ['$resource',
         }, {
             save:   {
                 method:'POST',
-                params: {teamSlug: '@_id'}
+                params: {teamSlug: '@_id'} // prevent slug being used for routing on creation
             },
             update: {
                 method: 'PUT'

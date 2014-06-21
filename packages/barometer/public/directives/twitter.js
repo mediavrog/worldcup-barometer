@@ -19,7 +19,10 @@ angular.module('mean')
             controller: function ($scope) {
                 $scope.tweets = [
                     {
-                        text: 'Loading tweets ...'
+                        text: 'Loading tweets ...',
+                        user: {
+                            profile_image_url: 'http://ajaxload.info/cache/ff/ff/ff/00/00/00/1-0.gif'
+                        }
                     }
                 ];
 
@@ -33,6 +36,21 @@ angular.module('mean')
                         });
                     }, 10000);
                 };
+
+                /**
+                 * Cleans up the update timer (polling)
+                 */
+                $scope.stopUpdates = function () {
+                    if (angular.isDefined(poller)) {
+                        $interval.cancel(poller);
+                        poller = undefined;
+                    }
+                };
+
+                $scope.$on('$destroy', function () {
+                    // Make sure that the interval is destroyed
+                    $scope.stopUpdates();
+                });
             }
         };
     }])

@@ -25,12 +25,12 @@ Barometer.register(function(app, auth, database) {
         menu: 'main'
     });
 
-    Barometer.menus.add({
-        roles: ['authenticated'],
-        title: 'All matches',
-        link: 'all matches',
-        menu: 'main'
-    });
+//    Barometer.menus.add({
+//        roles: ['authenticated'],
+//        title: 'All matches',
+//        link: 'all matches',
+//        menu: 'main'
+//    });
 
     Barometer.menus.add({
         roles: ['authenticated'],

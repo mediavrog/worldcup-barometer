@@ -43,6 +43,8 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
         /**
          * Initializes this controller with matches for the dropdown and
          * sets up the most relevant (upcoming) match for display.
+         *
+         * TODO: use server push (e. g. socket.io for broadcasting on model updates)
          */
         var poller;
         $scope.initialize = function () {
@@ -50,7 +52,6 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 $scope.matches = matches;
                 $scope.match = matches[0];
                 // checks for updates match support values
-                // TODO: use server push (e. g. socket.io for broadcasting on model updates)
                 poller = $interval(function () {
                     $scope.loadMatch($scope.match._id);
                 }, 10000);

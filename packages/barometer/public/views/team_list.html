@@ -7,8 +7,8 @@
                 <td>Country</td>
                 <td>Team Hashtag</td>
                 <td>Cup Hashtag</td>
-                <td>Support</td>
-                <td>Booeing</td>
+                <td>Support Total</td>
+                <!--<td>Booeing</td>-->
                 <td></td>
             </tr>
             </thead>
@@ -28,7 +28,7 @@
                 <td>#{{team.slug | uppercase}}</td>
                 <td>#{{team.cup_slug}}</td>
                 <td>{{team.support}}</td>
-                <td>{{team.boo}}</td>
+                <!--<td>{{team.boo}}</td>-->
                 <td><action-button-cheer ng-team="team" ng-match="match"></action-button-cheer></td>
             </tr>
             </tbody>

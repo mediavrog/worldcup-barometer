@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Shows a dynamically updating twitter stream for given keyword
+ *
+ * TODO: consider server push for registered keywords
+ */
 angular.module('mean')
     .directive('twitterStream', ['Twitter', '$interval', function (Twitter, $interval) {
         return {

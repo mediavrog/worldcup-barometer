@@ -48,13 +48,19 @@
             </div>
         </div>
 
-        <div ng-controller="TeamsController" ng-init="find()">
-            <select name="team1"
-                    data-ng-model="$parent.team1" id="team1"
-                    ng-options="team._id as team.slug for team in teams"></select>
+        <div class="form-group">
+            <label mean-token="'create-teams'" class="col-md-3 control-label">Ends at</label>
 
-            <select name="team2" data-ng-model="$parent.team2" id="team2"
-                    ng-options="team._id as team.slug for team in teams"></select>
+            <div class="col-md-9" ng-controller="TeamsController" ng-init="find()">
+                <select name="team1"
+                        data-ng-model="$parent.team1" id="team1"
+                        ng-options="team._id as team.slug for team in teams"></select>
+
+                vs
+
+                <select name="team2" data-ng-model="$parent.team2" id="team2"
+                        ng-options="team._id as team.slug for team in teams"></select>
+            </div>
         </div>
 
         <div class="form-group">

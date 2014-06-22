@@ -1,4 +1,4 @@
-<div data-ng-controller="BarometerController" data-ng-init="initialize()" class="container-fluid">
+<div data-ng-hide="!match" data-ng-controller="BarometerController" data-ng-init="initialize()" class="container-fluid">
 
     <select name="match" ng-model="selectedMatchId" ng-change="loadMatch(selectedMatchId)"
             class="match_dropdown btn btn-default btn-block center-block">
@@ -64,5 +64,6 @@
             <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
         </div>
     </div>
-
 </div>
+
+<h1 data-ng-hide="match">No matches found in the live feed. <br> Ask the admin to <a href="/#!/matches/create">create some</a>?</h1>

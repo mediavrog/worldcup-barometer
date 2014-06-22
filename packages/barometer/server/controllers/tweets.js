@@ -19,8 +19,6 @@ var  clientSecret = '4e7hDTAaXT4gTTMvBEiryOsEYltt78YHznWPTw22ERuThiuFkn';
  * Create a tweet
  */
 exports.create = function (req, res) {
-    //console.log(req.user || null);
-
     var twitter = new TwitterApi({
         consumer_key: clientID,
         consumer_secret: clientSecret,
@@ -28,8 +26,10 @@ exports.create = function (req, res) {
         access_token_secret: req.user.twitter_token.secret
     });
 
-    twitter.post('statuses/update', { status: req.body }, function (err, data, response) {
+    twitter.post('statuses/update', { status: req.body.content }, function (err, data, response) {
+        console.log(err);
         console.log(data);
+        console.log(response);
         if (err) {
             return res.jsonp(500, {
                 error: 'Could not send tweet'
@@ -44,6 +44,7 @@ exports.create = function (req, res) {
  */
 exports.search = function (req, res) {
     //console.log(req.query.keyword, clientID, clientSecret, req.user.twitter_token.token, req.user.twitter_token.secret);
+    if(req.query.keyword === null) return res.jsonp({});
 
     var twitter = new TwitterApi({
         consumer_key: clientID,
@@ -52,7 +53,7 @@ exports.search = function (req, res) {
         access_token_secret: req.user.twitter_token.secret
     });
 
-    twitter.get('search/tweets', { q: req.query.keyword, count: 20, include_entities: 0 }, function (err, data, response) {
+    twitter.get('search/tweets', { q: req.query.keyword, count: 20, include_entities: 0, since_id: req.query.since_id }, function (err, data, response) {
         if (err) {
             return res.jsonp(500, {
                 error: 'Could not fetch tweets'

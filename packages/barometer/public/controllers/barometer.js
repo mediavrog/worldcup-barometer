@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.barometer').controller('BarometerController', ['$scope', '$interval', 'Global', 'Matches',
-    function ($scope, $interval, Global, Matches) {
+angular.module('mean.barometer').controller('BarometerController', ['$scope', '$interval', 'Global', 'Matches', 'Twitter',
+    function ($scope, $interval, Global, Matches, Twitter) {
         $scope.global = Global;
         $scope.match = null;
         $scope.matches = [];
@@ -17,6 +17,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 type: 'info'
             }
         ];
+        $scope.alerts = [];
 
         /**
          * Initializes this controller with matches for the dropdown and
@@ -46,6 +47,24 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 //console.log('Loaded match..', match);
                 $scope.match = match;
             });
+        };
+
+        /**
+         * Posts a tweet
+         */
+        $scope.tweet = function (tweetContent) {
+            new Twitter({content: tweetContent}).$save(function (response) {
+                console.log('TWITTER posted', response);
+                $scope.addAlert('success', 'Your tweet was posted: ' + response.text);
+            });
+        };
+
+        $scope.addAlert = function (type, msg) {
+            $scope.alerts.push({type: type, msg: msg});
+        };
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
         };
 
         /**

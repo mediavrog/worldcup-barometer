@@ -1,69 +1,76 @@
-<div data-ng-hide="!match" data-ng-controller="BarometerController" data-ng-init="initialize()" class="container-fluid">
+<div data-ng-controller="BarometerController" data-ng-init="initialize()">
 
-    <select name="match" ng-model="selectedMatchId" ng-change="loadMatch(selectedMatchId)"
-            class="match_dropdown btn btn-default btn-block center-block">
-        <option ng-repeat="match in matches" value="{{match._id}}">
-            {{match | relativeMatchTime}} - {{match.team1.title}} vs {{match.team2.title}}
-        </option>
-    </select>
+    <div data-ng-hide="!match" class="container-fluid">
 
-    <!-- selected match info -->
-    <div class="row">
-        <div class="col-lg-2 col-md-offset-3">
-            <team-info ng-model="match.team1"></team-info>
+        <select name="match" ng-model="selectedMatchId" ng-change="loadMatch(selectedMatchId)"
+                class="match_dropdown btn btn-default btn-block center-block">
+            <option ng-repeat="match in matches" value="{{match._id}}">
+                {{match | relativeMatchTime}} ({{match.started_at | date:'medium'}}) - {{match.team1.title}} vs
+                {{match.team2.title}}
+            </option>
+        </select>
+
+        <!-- selected match info -->
+        <div class="row">
+            <div class="col-lg-2 col-md-offset-3">
+                <team-info ng-model="match.team1"></team-info>
+            </div>
+            <div class="col-lg-2 text-center"><strong>vs</strong></div>
+            <div class="col-lg-2">
+                <team-info ng-model="match.team2"></team-info>
+            </div>
         </div>
-        <div class="col-lg-2 text-center"><strong>vs</strong></div>
-        <div class="col-lg-2">
-            <team-info ng-model="match.team2"></team-info>
+
+        <div class="text-center"><strong>{{match | relativeMatchTime}}</strong> ({{match.started_at | date:'medium'}} -
+            {{match.ended_at | date:'medium'}})
+        </div>
+
+        <progress>
+            <bar ng-repeat="bar in team_support track by $index" value="bar.percentage" type="{{bar.type}}">
+                <span>{{bar.value}}</span>
+            </bar>
+        </progress>
+
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-lg-3">
+                <action-button-cheer ng-team="match.team1" ng-match="match"></action-button-cheer>
+                <br/>
+                <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <form name="tweetForm" class="form-inline col-lg-12" role="form" style="margin-bottom: 20px"
+                          data-ng-submit="tweet(tweetContent)">
+                        <div class="row form-group col-lg-9">
+                            <label class="sr-only" for="tweetContent">Your cheer tweet</label>
+                            <textarea class="form-control" id="tweetContent" data-ng-model="tweetContent"
+                                      placeholder="Cheer for your team or share your thoughts on the game"
+                                      style="width: 100%;"></textarea>
+                        </div>
+                        <button type="submit" class="col-lg-3 btn btn-default">Tweet</button>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        {{alert.msg}}
+                    </alert>
+                </div>
+
+                <div class="row">
+                    <twitter-stream keyword="#{{match.team1.slug}} #{{match.team2.slug}}"></twitter-stream>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <action-button-cheer ng-team="match.team2" ng-match="match"></action-button-cheer>
+                <br/>
+                <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
+            </div>
         </div>
     </div>
 
-    <div class="text-center"><strong>{{match | relativeMatchTime}}</strong> ({{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}})</div>
+    <h1 data-ng-hide="!matches || matches.length">No matches configured. <br> Why don't you ask an admin to <a href="/#!/matches/create">create some</a>?</h1>
 
-    <progress>
-        <bar ng-repeat="bar in team_support track by $index" value="bar.percentage" type="{{bar.type}}">
-            <span>{{bar.value}}</span>
-        </bar>
-    </progress>
-
-    <div class="row" style="margin-top: 50px;">
-        <div class="col-lg-3">
-            <action-button-cheer ng-team="match.team1" ng-match="match"></action-button-cheer>
-            <br/>
-            <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
-        </div>
-
-        <div class="col-lg-6">
-            <div class="row">
-                <form name="tweetForm" class="form-inline col-lg-12" role="form" style="margin-bottom: 20px"
-                      data-ng-submit="tweet(tweetContent)">
-                    <div class="row form-group col-lg-9">
-                        <label class="sr-only" for="tweetContent">Your cheer tweet</label>
-                        <textarea class="form-control" id="tweetContent" data-ng-model="tweetContent"
-                                  placeholder="Cheer for your team or share your thoughts on the game"
-                                  style="width: 100%;"></textarea>
-                    </div>
-                    <button type="submit" class="col-lg-3 btn btn-default">Tweet</button>
-                </form>
-            </div>
-
-            <div class="row">
-                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-                    {{alert.msg}}
-                </alert>
-            </div>
-
-            <div class="row">
-                <twitter-stream keyword="#{{match.team1.slug}} #{{match.team2.slug}}"></twitter-stream>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <action-button-cheer ng-team="match.team2" ng-match="match"></action-button-cheer>
-            <br/>
-            <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
-        </div>
-    </div>
 </div>
-
-<h1 data-ng-hide="match">No matches found in the live feed. <br> Ask the admin to <a href="/#!/matches/create">create some</a>?</h1>

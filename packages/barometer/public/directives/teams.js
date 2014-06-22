@@ -26,8 +26,10 @@ angular.module('mean.barometer')
                 '<br />Cheer for {{ngTeam.title}}' +
                 '</div>',
             link: function (scope, elem, attrs) {
+                scope.buttonStyle = 'btn-success';
+
                 // watcher on team to decide on initial style for cheer button
-                scope.$watch('ngTeam', function (newMatch, oldMatch) {
+                scope.$watch('ngMatch', function (newMatch, oldMatch) {
                     if (angular.isDefined(newMatch)) {
                         scope.buttonStyle = new Date(newMatch.ended_at) >= new Date() ? 'btn-success' : 'btn-default';
                     }
@@ -35,7 +37,7 @@ angular.module('mean.barometer')
 
                 elem.bind('click', function () {
                     // only cheer if match not finished already
-                    if (new Date(scope.ngMatch.ended_at) >= new Date()) {
+                    if (!angular.isDefined(scope.ngMatch) || new Date(scope.ngMatch.ended_at) >= new Date()) {
                         //console.log('Cheer for team ' + scope.ngTeam.slug);
 
                         // always update team support

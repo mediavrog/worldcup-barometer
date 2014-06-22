@@ -12,8 +12,6 @@ var mongoose = require('mongoose'),
  * Find team by id
  */
 exports.team = function (req, res, next, id) {
-    console.log('team: ' + id);
-
     Team.load(id, function (err, team) {
         if (err) return next(err);
         if (!team) return next(new Error('Failed to load team ' + id));

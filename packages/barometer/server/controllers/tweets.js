@@ -46,7 +46,7 @@ exports.search = function (req, res) {
         access_token_secret: req.user.twitter_token.secret
     });
 
-    twitter.get('search/tweets', { q: req.query.keyword, count: 10, include_entities: 0, since_id: req.query.since_id }, function (err, data, response) {
+    twitter.get('search/tweets', { q: req.query.keyword, count: 10, include_entities: 0, since_id: req.query.sinceId}, function (err, data, response) {
         if (err) {
             return res.jsonp(500, {
                 error: 'Could not fetch tweets'

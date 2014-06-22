@@ -27,7 +27,7 @@ angular.module('mean.barometer')
                 '</div>',
             link: function (scope, elem, attrs) {
                 elem.bind('click', function () {
-                    console.log('Cheer for team ' + scope.ngTeam.slug);
+                    //console.log('Cheer for team ' + scope.ngTeam.slug);
 
                     // always update team support
                     scope.ngTeam.support++;
@@ -48,7 +48,7 @@ angular.module('mean.barometer')
 
                     // match handling
                     if (angular.isDefined(scope.ngMatch)) {
-                        console.log('... in match ' + scope.ngMatch._id);
+                        //console.log('... in match ' + scope.ngMatch._id);
                         if (scope.ngMatch.team1.slug === scope.ngTeam.slug) {
                             scope.ngMatch.team1_support++;
                         } else {
@@ -66,15 +66,15 @@ angular.module('mean.barometer')
             }
         };
     }])
-    .directive('actionButtonBoo', ['$http', function ($http) { //http://stackoverflow.com/a/22142363/472262
-        return {
-            scope: {
-                ngModel: '=',
-                matchId: '@'
-            },
-            restrict: 'E',
-            replace: true,
-            template: '<div class="btn btn-danger center-block">Boo</div>{{matchId}}'
-        };
-    }])
+//    .directive('actionButtonBoo', ['$http', function ($http) { //http://stackoverflow.com/a/22142363/472262
+//        return {
+//            scope: {
+//                ngModel: '=',
+//                matchId: '@'
+//            },
+//            restrict: 'E',
+//            replace: true,
+//            template: '<div class="btn btn-danger center-block">Boo</div>{{matchId}}'
+//        };
+//    }])
 ;

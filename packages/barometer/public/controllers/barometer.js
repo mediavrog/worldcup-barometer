@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Provides live feed / match selector.
+ */
 angular.module('mean.barometer').controller('BarometerController', ['$scope', '$interval', 'Global', 'Matches', 'Twitter',
     function ($scope, $interval, Global, Matches, Twitter) {
         $scope.global = Global;
@@ -20,6 +23,24 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
         $scope.alerts = [];
 
         /**
+         * Posts a tweet
+         */
+        $scope.tweet = function (tweetContent) {
+            new Twitter({content: tweetContent}).$save(function (response) {
+                console.log('TWITTER posted', response);
+                $scope.addAlert('success', 'Your tweet was posted: ' + response.text);
+            });
+        };
+
+        $scope.addAlert = function (type, msg) {
+            $scope.alerts.push({type: type, msg: msg});
+        };
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+        };
+
+        /**
          * Initializes this controller with matches for the dropdown and
          * sets up the most relevant (upcoming) match for display.
          */
@@ -29,7 +50,7 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 $scope.matches = matches;
                 $scope.match = matches[0];
                 // checks for updates match support values
-                // TODO: use server push (e. g. socket.io for braodcasting on model updates)
+                // TODO: use server push (e. g. socket.io for broadcasting on model updates)
                 poller = $interval(function () {
                     $scope.loadMatch($scope.match._id);
                 }, 10000);
@@ -47,24 +68,6 @@ angular.module('mean.barometer').controller('BarometerController', ['$scope', '$
                 //console.log('Loaded match..', match);
                 $scope.match = match;
             });
-        };
-
-        /**
-         * Posts a tweet
-         */
-        $scope.tweet = function (tweetContent) {
-            new Twitter({content: tweetContent}).$save(function (response) {
-                console.log('TWITTER posted', response);
-                $scope.addAlert('success', 'Your tweet was posted: ' + response.text);
-            });
-        };
-
-        $scope.addAlert = function (type, msg) {
-            $scope.alerts.push({type: type, msg: msg});
-        };
-
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
         };
 
         /**

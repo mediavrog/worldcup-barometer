@@ -38,6 +38,7 @@ angular.module('mean.auth').config(['$stateProvider',
                 resolve: {
                     loggedin: checkLoggedOut
                 }
-            });
+            })
+        ;
     }
 ]);

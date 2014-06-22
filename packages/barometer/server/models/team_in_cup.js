@@ -28,10 +28,6 @@ var TeamInCupSchema = new Schema({
         type: String,
         required: true
     },
-    points: {
-        type: Number,
-        default: 0
-    },
     support: {
         type: Number,
         default: 0

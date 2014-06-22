@@ -1,3 +1,11 @@
 <section data-ng-controller="IndexController">
-    <h1 mean-token="'home-default'">This is the home view</h1>
+    <h1 mean-token="'home-default'" class="text-center">The Worldcup Barometer 2014</h1>
+    <p class="text-center" ng-hide="global.authenticated">
+        <a href="/#!/register" class="btn btn-default btn-lg">Sign in with Twitter to be able to:</a>
+    </p>
+    <p class="text-center">
+        <a href="/#!/barometer" class="btn btn-success">Cheer during a match</a>
+        or
+        <a href="/#!/teams" class="btn btn-info">Check your favourite team's support</a>
+    </p>
 </section>

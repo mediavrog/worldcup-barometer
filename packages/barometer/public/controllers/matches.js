@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * CRUD controller for matches.
+ */
 angular.module('mean').controller('MatchesController', ['$scope', '$stateParams', '$location', 'Global', 'Matches', 'Me',
     function ($scope, $stateParams, $location, Global, Matches, Me) {
         $scope.global = Global;

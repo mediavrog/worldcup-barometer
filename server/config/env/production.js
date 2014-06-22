@@ -3,7 +3,7 @@
 module.exports = {
     db: 'mongodb://heroku:0LF6T5oojF0vBa7nz2R52Uwe6pYXLMBHxcUURd2TJ7-wALfVnaAENPFmLCR1CAMlwl2SjvstH6RokNiA8h-LSw@kahana.mongohq.com:10075/app26441635',
     app: {
-        name: 'MEAN - A Modern Stack - Production'
+        name: 'Worldcup Barometer'
     },
     facebook: {
         clientID: 'APP_ID',

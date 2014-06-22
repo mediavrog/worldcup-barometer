@@ -1,15 +1,17 @@
 # humanstxt.org/
 # The humans responsible & technology colophon
 
-# TEAM
+/* TEAM */
 
-    <name> -- <role> -- <twitter>
+Maik Vlcek
+Site: mediavrog.net/blog
+Twitter: mediavrog
 
-# THANKS
+/* THANKS */
 
-    <name>
+Natsumi for the support while I was coding away.
 
-# TECHNOLOGY COLOPHON
+/* SITE */
 
-    HTML5, CSS3
-    jQuery, Modernizr
+Build on the MEAN.io stack
+Developed from 2014/07/16 - 2014/07/22 after work to get started with the MEAN stack and specifically angular.js

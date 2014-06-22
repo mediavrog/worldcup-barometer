@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="text-center">{{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}}</div>
+    <div class="text-center"><strong>{{match | relativeMatchTime}}</strong> ({{match.started_at | date:'medium'}} - {{match.ended_at | date:'medium'}})</div>
 
     <progress>
         <bar ng-repeat="bar in team_support track by $index" value="bar.percentage" type="{{bar.type}}">
@@ -30,7 +30,7 @@
         <div class="col-lg-3">
             <action-button-cheer ng-team="match.team1" ng-match="match"></action-button-cheer>
             <br/>
-            <action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>
+            <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
         </div>
 
         <div class="col-lg-6">
@@ -61,7 +61,7 @@
         <div class="col-lg-3">
             <action-button-cheer ng-team="match.team2" ng-match="match"></action-button-cheer>
             <br/>
-            <action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>
+            <!--<action-button-boo ng-team="match.team1" ng-match="match"></action-button-boo>-->
         </div>
     </div>
 

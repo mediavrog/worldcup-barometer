@@ -24,7 +24,7 @@ angular.module('mean').config(['$stateProvider',
 
         $stateProvider
             .state('barometer', {
-                url: '/barometer/',
+                url: '/barometer',
                 templateUrl: 'barometer/views/index.html'
             })
             .state('all matches', {

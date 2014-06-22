@@ -1,27 +1,20 @@
 'use strict';
 
-// TODO find way to read global config
 
 /**
  * Module dependencies.
  */
-var TwitterApi = require('twit');
-//config = require('./config');
-
-// debug
-var  clientID = 'g6bDthYtzCVy2GpAUn6GYcuPV';
-var  clientSecret = '4e7hDTAaXT4gTTMvBEiryOsEYltt78YHznWPTw22ERuThiuFkn';
-// live
-//var clientID = 'd7CO19fnPpLXbs0agUmSvlCgW';
-//var clientSecret = 'YforTfhXY38dzA84EstX3sXphichUgSMuWtfALfl6MQLlEzmb7';
+var TwitterApi = require('twit'),
+    config = require('../../../../server/config/config');
+// TODO find proper way to read app config
 
 /**
  * Create a tweet
  */
 exports.create = function (req, res) {
     var twitter = new TwitterApi({
-        consumer_key: clientID,
-        consumer_secret: clientSecret,
+        consumer_key: config.twitter.clientID,
+        consumer_secret: config.twitter.clientSecret,
         access_token: req.user.twitter_token.token,
         access_token_secret: req.user.twitter_token.secret
     });
@@ -47,13 +40,13 @@ exports.search = function (req, res) {
     if(req.query.keyword === null) return res.jsonp({});
 
     var twitter = new TwitterApi({
-        consumer_key: clientID,
-        consumer_secret: clientSecret,
+        consumer_key: config.twitter.clientID,
+        consumer_secret: config.twitter.clientSecret,
         access_token: req.user.twitter_token.token,
         access_token_secret: req.user.twitter_token.secret
     });
 
-    twitter.get('search/tweets', { q: req.query.keyword, count: 20, include_entities: 0, since_id: req.query.since_id }, function (err, data, response) {
+    twitter.get('search/tweets', { q: req.query.keyword, count: 10, include_entities: 0, since_id: req.query.since_id }, function (err, data, response) {
         if (err) {
             return res.jsonp(500, {
                 error: 'Could not fetch tweets'

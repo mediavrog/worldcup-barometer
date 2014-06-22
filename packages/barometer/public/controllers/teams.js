@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * CRUD controller for teams.
+ */
 angular.module('mean').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Global', 'Teams',
     function($scope, $stateParams, $location, Global, Teams) {
         $scope.global = Global;

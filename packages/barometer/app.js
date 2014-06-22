@@ -20,7 +20,7 @@ Barometer.register(function(app, auth, database) {
     //We are adding a link to the main menu for all authenticated users
     Barometer.menus.add({
         roles: ['authenticated'],
-        title: 'Worldcup Barometer',
+        title: 'Match live feed',
         link: 'barometer',
         menu: 'main'
     });
@@ -34,15 +34,15 @@ Barometer.register(function(app, auth, database) {
 
     Barometer.menus.add({
         roles: ['authenticated'],
-        title: 'Create match',
-        link: 'create match',
+        title: 'All teams',
+        link: 'all teams',
         menu: 'main'
     });
 
     Barometer.menus.add({
         roles: ['authenticated'],
-        title: 'All teams',
-        link: 'all teams',
+        title: 'Create match',
+        link: 'create match',
         menu: 'main'
     });
 

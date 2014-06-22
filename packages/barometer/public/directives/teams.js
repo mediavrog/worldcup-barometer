@@ -21,47 +21,61 @@ angular.module('mean.barometer')
             },
             restrict: 'E',
             replace: true,
-            template: '<div class="btn btn-success center-block">' +
+            template: '<div class="btn center-block {{buttonStyle}}">' +
                 '<img height="64" width="64" ng-src="/barometer/assets/img/flags/{{ngTeam.slug | uppercase}}.png"/>' +
                 '<br />Cheer for {{ngTeam.title}}' +
                 '</div>',
             link: function (scope, elem, attrs) {
-                elem.bind('click', function () {
-                    //console.log('Cheer for team ' + scope.ngTeam.slug);
-
-                    // always update team support
-                    scope.ngTeam.support++;
-
-                    // since the teams model might just be a plain old javascript object
-                    // when referenced by match, we use the service update method in that case
-                    // otherwise, we use the standard $update method on the resource
-                    // TODO: find out if there a better way
-                    if (angular.isDefined(scope.ngTeam.$update)) {
-                        scope.ngTeam.$update(function () {
-                            //console.log('Team updated (using self aware resource)');
-                        });
-                    } else {
-                        Teams.update(scope.ngTeam, function(){
-                            //console.log('Team updated (using service)');
-                        });
+                // watcher on team to decide on initial style for cheer button
+                scope.$watch('ngTeam', function (newMatch, oldMatch) {
+                    if (angular.isDefined(newMatch)) {
+                        scope.buttonStyle = new Date(newMatch.ended_at) >= new Date() ? 'btn-success' : 'btn-default';
                     }
+                }, true);
 
-                    // match handling
-                    if (angular.isDefined(scope.ngMatch)) {
-                        //console.log('... in match ' + scope.ngMatch._id);
-                        if (scope.ngMatch.team1.slug === scope.ngTeam.slug) {
-                            scope.ngMatch.team1_support++;
+                elem.bind('click', function () {
+                    // only cheer if match not finished already
+                    if (new Date(scope.ngMatch.ended_at) >= new Date()) {
+                        //console.log('Cheer for team ' + scope.ngTeam.slug);
+
+                        // always update team support
+                        scope.ngTeam.support++;
+
+                        // since the teams model might just be a plain old javascript object
+                        // when referenced by match, we use the service update method in that case
+                        // otherwise, we use the standard $update method on the resource
+                        // TODO: find out if there a better way
+                        if (angular.isDefined(scope.ngTeam.$update)) {
+                            scope.ngTeam.$update(function () {
+                                //console.log('Team updated (using self aware resource)');
+                            });
                         } else {
-                            scope.ngMatch.team2_support++;
+                            Teams.update(scope.ngTeam, function () {
+                                //console.log('Team updated (using service)');
+                            });
                         }
 
-                        //console.log('Update match ', scope.ngMatch, scope.ngMatch.$update);
-                        scope.ngMatch.$update(function () {
-                            //console.log('Match updated');
-                        });
-                    }
+                        // match handling
+                        if (angular.isDefined(scope.ngMatch)) {
+                            //console.log('... in match ' + scope.ngMatch._id);
+                            if (scope.ngMatch.team1.slug === scope.ngTeam.slug) {
+                                scope.ngMatch.team1_support++;
+                            } else {
+                                scope.ngMatch.team2_support++;
+                            }
 
-                    scope.$apply();
+                            //console.log('Update match ', scope.ngMatch, scope.ngMatch.$update);
+                            scope.ngMatch.$update(function () {
+                                //console.log('Match updated');
+                            });
+                        }
+
+                        scope.$apply();
+                    } else {
+                        alert('Thank you for cheering. Since this match ended already, cheering is stopped now.');
+                        scope.buttonStyle = 'btn-default';
+                        scope.$apply();
+                    }
                 });
             }
         };

@@ -51,6 +51,12 @@ angular.module('mean')
                     // Make sure that the interval is destroyed
                     $scope.stopUpdates();
                 });
+
+                // watcher on team to decide on initial style for cheer button
+                $scope.$watch('keyword', function (newKey, oldKey) {
+                    $scope.tweets = [];
+                    $scope.lastMaxId = null;
+                }, true);
             }
         };
     }])
